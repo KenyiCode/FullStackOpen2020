@@ -1,0 +1,37 @@
+title Depicting the Form submitting process on Notes page
+
+note over browser:
+Submit button is pressed
+end note 
+
+browser -> server: Sends user input in the form of an HTTP POST request
+
+note over server:
+Responds with status code 302
+end note
+
+server -> browser: Requests new HTTP GET to address in header's location
+
+note over browser:
+Browser reloads Notes page
+triggering three more HTTP requests
+end note
+
+browser -> server: HTTP GET: main.css 
+server --> browser: main.css code
+browser -> server: HTTP GET: main.js
+server --> browser: main.js code 
+
+note over browser:
+browser executes js code that 
+requests json data from server
+end note 
+
+browser -> server: HTTP GET: data.json
+server --> browser: json data
+
+note over browser:
+browser displays new added note 
+due to event handlers and requested
+json data in js code
+end note
