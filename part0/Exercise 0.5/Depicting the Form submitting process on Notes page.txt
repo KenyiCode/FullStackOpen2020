@@ -1,20 +1,21 @@
 title Depicting the Form submitting process on Notes page
 
-note over browser:
-Submit button is pressed
-end note 
+browser -> server: HTTP GET: HTML code
+
+server --> browser: HTML Code
+
+browser -> server: HTTP GET: main.css
+
+server --> browser: main.css
+
+browser -> server: HTTP GET: main.js
+
+server --> browser: main.js
 
 note over browser:
-JS code fetched from server handles form data with 
-event handlers that stop default form submisson 
-and create the new note, rerender the new list, and 
-send the new note to the server
+js code requests json data from server
 end note 
 
-browser -> server: Sends HTTP POST request with new note as JSON data
+browser -> server: HTTP GET: data/json
 
-note over server:
-Content-Type header of request indicates data is in JSON format
-end note  
-
-server -> browser: Responds with status code 201 and does not ask for redirect
+server --> browser: data/json
