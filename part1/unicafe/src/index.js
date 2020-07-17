@@ -9,14 +9,20 @@ const Button = ({onClick, text}) => (
 
 const Statistic = (props) => {
   return (
-    <div>
+    <>
       <td>{props.text}: </td>
       <td>{props.value}</td>
-    </div>
+    </>
   )
 }
 
 const Statistics = ({good, neutral, bad, all}) => {
+  let avg = (good+bad)/all
+  let pos = (good/all)*100
+
+  avg = Math.floor(avg*10)/10
+  pos = Math.floor(pos*10)/10
+
   if (all === 0) {
     return (
       <div>
@@ -28,24 +34,26 @@ const Statistics = ({good, neutral, bad, all}) => {
   return (
     <div>
       <table>
-        <tr>
-          <Statistic text="Good" value={good}/>
-        </tr>
-        <tr>
-          <Statistic text="Neutral" value={neutral}/>
-        </tr>
-        <tr>
-          <Statistic text="Bad" value={bad}/>
-        </tr>
-        <tr>
-          <Statistic text="All" value={all}/>
-        </tr>
-        <tr>
-          <Statistic text="Average" value={(good+(bad))/all}/>
-        </tr>
-        <tr>
-          <Statistic text="Positive" value={((good/all)*100) + "%"}/>
-        </tr>
+        <tbody>
+          <tr>
+            <Statistic text="Good" value={good}/>
+          </tr>
+          <tr>
+            <Statistic text="Neutral" value={neutral}/>
+          </tr>
+          <tr>
+            <Statistic text="Bad" value={bad*-1}/>
+          </tr>
+          <tr>
+            <Statistic text="All" value={all}/>
+          </tr>
+          <tr>
+            <Statistic text="Average" value={avg}/>
+          </tr>
+          <tr>
+            <Statistic text="Positive" value={pos + "%"}/>
+          </tr>
+        </tbody>
       </table>
     </div>
   )
@@ -56,8 +64,6 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const [all, setAll] = useState(0)
-  // const [avg, setAvg] = useState(0)
-  // const [pos, setPos] = useState(0)
 
   const handleGoodClick = () => {
     setAll(all + 1)
